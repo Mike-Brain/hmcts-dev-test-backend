@@ -1,10 +1,40 @@
 # HMCTS Dev Test Backend
-This will be the backend for the brand new HMCTS case management system. As a potential candidate we are leaving
-this in your hands. Please refer to the brief for the complete list of tasks! Complete as much as you can and be
-as creative as you want.
 
-You should be able to run `./gradlew build` to start with to ensure it builds successfully. Then from that you
-can run the service in IntelliJ (or your IDE of choice) or however you normally would.
+This is the backend for the brand new HMCTS case management system. Below you'll find instructions for running the application, including automatic database initialization and testing the main API endpoints.
 
-There is an example endpoint provided to retrieve an example of a case. You are free to add/remove fields as you
-wish.
+## Building the Project
+
+1. Build the project using Gradle:
+   ```sh
+   ./gradlew build
+   ```
+
+## Running the Application
+
+1. Start the application and PostgreSQL using Docker Compose:
+   ```sh
+   docker-compose up -d
+   ```
+   - The application will run on port `4000`.
+   - The PostgreSQL database service will automatically create the database and tables on startup if they do not exist.
+
+2. View the application logs:
+   ```sh
+   docker-compose logs -f backend
+   ```
+
+## API Usage
+
+The API runs on `http://localhost:4000` when using Docker Compose.
+
+
+## Testing
+
+- Run all unit and integration tests using Gradle:
+  ```sh
+  ./gradlew test
+  ```
+
+This will confirm the application functionality with comprehensive test coverage.
+
+Use this `README.md` for an overview of running and interacting with the application.

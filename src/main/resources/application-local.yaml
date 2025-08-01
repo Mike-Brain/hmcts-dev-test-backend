@@ -1,0 +1,5 @@
+# local config for a spring-boot app using postgres
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres@${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:tasks}?createDatabaseIfNotExist=true
+    driver-class-name: org.postgresql.Driver
