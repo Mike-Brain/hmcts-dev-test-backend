@@ -4,20 +4,28 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import uk.gov.hmcts.reform.dev.enumerations.TaskStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import uk.gov.hmcts.reform.dev.model.Task;
 import uk.gov.hmcts.reform.dev.repository.TaskRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static java.util.Collections.emptyList;
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.badRequest;
+import static org.springframework.http.ResponseEntity.noContent;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/task")
@@ -87,7 +95,9 @@ public class TaskController {
      * Update a task by ID.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateTask(@PathVariable int id, @Valid @RequestBody Task updatedTask, BindingResult result) {
+    public ResponseEntity<?> updateTask(@PathVariable int id, 
+                                         @Valid @RequestBody Task updatedTask, 
+                                         BindingResult result) {
         if (result.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             result.getFieldErrors().forEach(error -> 

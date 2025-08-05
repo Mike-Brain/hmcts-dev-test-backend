@@ -1,12 +1,9 @@
 package uk.gov.hmcts.reform.dev.repository;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import uk.gov.hmcts.reform.dev.enumerations.TaskStatus;
 import uk.gov.hmcts.reform.dev.model.Task;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
